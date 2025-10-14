@@ -1,0 +1,102 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you:
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+
+title: "BeanVisionary AI Hub"
+email: "contact@beanvisionary.com"
+description: "Secure AI technology insights and analysis - Exploring artificial intelligence, machine learning, and cutting-edge technology trends"
+baseurl: "/"
+url: "https://hub.ai.beanvisionary.com"
+twitter_username: beanvisionary
+github_username:  beanvisionary
+author: "BeanVisionary"
+lang: "en"
+locale: "en_US"
+
+# SEO and Social Media Configuration
+seo:
+  type: WebSite
+  name: "BeanVisionary AI Hub"
+  links:
+    - "https://hub.ai.beanvisionary.com"
+    - "https://github.com/beanvisionary"
+
+# Social media profiles
+social:
+  name: "BeanVisionary AI Hub"
+  links:
+    - "https://github.com/beanvisionary"
+
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections for content management
+collections:
+  ai_news:
+    output: true
+    permalink: /:collection/:name/
+  site_content:
+    output: false
+
+# Default front matter for collections
+defaults:
+  - scope:
+      path: ""
+      type: "ai_news"
+    values:
+      layout: "ai_news_post"
+      category: "ai-news"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      category: "blog"
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - SECURITY.md
+  - _config.yml.security
+
+# External links security
+external_links:
+  enabled: true
+  rel: "noopener noreferrer"
+  target: "_blank"

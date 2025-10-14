@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% seo %}
+    
+    <meta name="description" content="{{ site.description | default: 'Secure AI technology insights and analysis' }}">
+    <meta name="keywords" content="AI, artificial intelligence, technology, machine learning, deep learning, AI news, AI analysis, BeanVisionary">
+    <meta name="author" content="{{ site.author | default: 'BeanVisionary' }}">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow, max-image-preview:large">
+    
+    <meta property="og:locale" content="en_US">
+    <meta property="og:language" content="en">
+    
+    {% include structured_data.html %}
+    
+    <meta property="og:locale" content="en_US">
+    <meta property="og:language" content="en">
+    
+    <meta property="og:title" content="{{ site.title | escape }}">
+    <meta property="og:description" content="{{ site.description | escape }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:image" content="{{ site.url }}/assets/images/og-image.png">
+    <meta property="og:image:alt" content="BeanVisionary AI Hub - AI Technology Insights">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ site.title | escape }}">
+    <meta name="twitter:description" content="{{ site.description | escape }}">
+    <meta name="twitter:image" content="{{ site.url }}/assets/images/twitter-card.png">
+    <meta name="twitter:site" content="@BeanVisionary">
+    <meta name="twitter:creator" content="@BeanVisionary">
+    
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    
+    <link rel="manifest" href="/assets/images/site.webmanifest">
+    
+    <meta name="theme-color" content="#2E7151">
+    <meta name="msapplication-TileColor" content="#2E7151">
+    
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <link rel="stylesheet" href="/assets/home-styles.css">
+    <title>{{ site.title | escape }} - {{ page.title | default: 'BeanVisionary AI Hub' }}</title>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header role="banner" aria-label="Site header">
+        <div class="container">
+            <div class="header-content">
+                <a href="{{ '/' | relative_url }}" class="logo" aria-label="{{ site.title }} Home">
+                    <img src="{{ site.data.site_content.logo.image }}" alt="{{ site.data.site_content.logo.image_alt }}">
+                    {{ site.data.site_content.logo.text }}
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content" role="main" aria-label="Main content">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <h1 id="hero-title">{{ site.data.site_content.hero.title }}</h1>
+                <p>{{ site.data.site_content.hero.subtitle }}</p>
+            </div>
+        </section>
+        
+        <section class="blog-section" aria-labelledby="blog-section-title">
+            <div class="container">
+                <h2 id="blog-section-title" class="section-title">{{ site.data.site_content.blog_section.title }}</h2>
+                <div class="blog-posts" role="region" aria-label="Featured AI news articles">
+                    {% assign featured_posts = site.ai_news | where: "featured", true | sort: 'date' | reverse | limit: 3 %}
+                    {% for post in featured_posts %}
+                    <article class="post-card" role="article" aria-labelledby="post-title-{{ forloop.index }}">
+                        {% if post.image %}
+                        <div class="post-image">
+                            <img src="{{ post.image }}" alt="{{ post.image_alt | default: post.title }}" loading="lazy">
+                        </div>
+                        {% endif %}
+                        <div class="post-content">
+                            <h3 id="post-title-{{ forloop.index }}" class="post-title">{{ post.title }}</h3>
+                            <div class="post-meta">
+                                <time datetime="{{ post.date | date_to_xmlschema }}">Published on {{ post.date | date: "%B %d, %Y" }}</time>
+                            </div>
+                            <p class="post-excerpt">{{ post.excerpt }}</p>
+                            <a href="{{ post.url }}" 
+                                class="internal-link"
+                                aria-label="Read more about {{ post.title }}">Read More →
+                            </a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer role="contentinfo" aria-label="Site footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>{{ site.data.site_content.footer.tagline }}</p>
+                <p>{{ site.data.site_content.footer.copyright }}</p>
+            </div>
+        </div>
+    </footer>
+    
+    <style>
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: var(--primary-color);
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 4px;
+        z-index: 1000;
+        transition: top 0.3s;
+    }
+    
+    .skip-link:focus {
+        top: 6px;
+    }
+    
+    a:focus,
+    button:focus,
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: 3px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+    
+    @media (prefers-contrast: high) {
+        body {
+            background: white;
+            color: black;
+        }
+        
+        .hero {
+            background: black;
+            color: white;
+        }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+    
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    a.external-link:focus {
+        outline: 3px solid var(--accent-color);
+        outline-offset: 2px;
+    }
+    
+    .external-indicator {
+        color: var(--meta-text);
+        font-size: 0.8em;
+        margin-left: 0.25rem;
+    }
+    
+    .post-meta {
+        color: #5a6b5e;
+    }
+    
+    .news-meta {
+        color: #5a6b5e;
+    }
+    </style>
+</body>
+</body>
+</html>

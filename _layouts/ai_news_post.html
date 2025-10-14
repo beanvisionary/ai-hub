@@ -1,0 +1,274 @@
+---
+layout: default
+---
+
+<!-- Article structured data for SEO -->
+{% include structured_data.html %}
+
+<section class="post-section" aria-labelledby="post-title">
+  <div class="container">
+    <article class="post-card-single" itemscope itemtype="https://schema.org/Article">
+  {% if page.image %}
+    <div class="post-image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+      <img src="{{ page.image }}" alt="{{ page.image_alt | default: page.title }}" itemprop="url" loading="lazy">
+      <meta itemprop="width" content="800">
+      <meta itemprop="height" content="400">
+    </div>
+  {% endif %}
+
+  <div class="post-content" itemprop="articleBody">
+    <h1 class="post-title" id="post-title" itemprop="headline">{{ page.title | escape }}</h1>
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %d, %Y" }}</time>
+      {% if page.source %}
+        <span class="post-source" itemprop="publisher">Source: {{ page.source }}</span>
+      {% endif %}
+      {% if page.category %}
+        <span class="post-category" itemprop="articleSection">Category: {{ page.category | capitalize }}</span>
+      {% endif %}
+    </div>
+    {% if page.tags %}
+      <div class="post-tags" itemprop="keywords">
+        {% for tag in page.tags %}
+          <span class="tag" itemprop="keyword">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {{ content }}
+  </div>
+
+  {% if page.source_url %}
+    <div class="post-source-link" itemprop="mainEntityOfPage" itemscope itemtype="https://schema.org/WebPage">
+      <a href="{{ page.source_url }}" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="external-link"
+          aria-label="Read full article on {{ page.source }} (opens in new tab)">
+        Read full article on {{ page.source }}
+        <span class="external-indicator" aria-hidden="true">(External Link)</span>
+      </a>
+    </div>
+  {% endif %}
+
+      <footer class="post-footer" role="contentinfo" aria-label="Article footer">
+        <a href="/" class="btn btn-back" aria-label="Return to homepage">← Back to Home</a>
+      </footer>
+    </article>
+  </div>
+</section>
+
+<style>
+:root {
+  --primary-color: #2E7151;
+  --secondary-color: #1a472a;
+  --accent-color: #4CAF50;
+  --light-color: #e8f5e8;
+  --background-color: #f8f9fa;
+  --text-color: #333;
+  --meta-text: #666;
+}
+
+.post-section {
+  padding: 4rem 0;
+  background: var(--light-color);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.post-card-single {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.post-content {
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.post-content .post-title {
+  color: var(--secondary-color);
+  margin-bottom: 1.5rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.post-content .post-meta {
+  color: var(--meta-text);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.post-content .post-meta span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.post-content .post-source, .post-content .post-category {
+  font-weight: 500;
+}
+
+.post-content .post-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.post-content .tag {
+  display: inline-block;
+  background: var(--accent-color);
+  color: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: transform 0.2s;
+}
+
+.post-content .tag:hover {
+  transform: translateY(-1px);
+}
+
+.post-image {
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+.post-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+
+.post-image img:hover {
+  transform: scale(1.02);
+}
+
+.post-content h2 {
+  color: var(--secondary-color);
+  margin: 2.5rem 0 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.post-content h3 {
+  color: var(--primary-color);
+  margin: 2rem 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.post-content p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.post-content strong {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.post-source-link {
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--light-color), #f8f9fa);
+  border-radius: 8px;
+  text-align: center;
+  border-left: 4px solid var(--accent-color);
+}
+
+.external-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.external-link:hover {
+  color: var(--secondary-color);
+}
+
+.external-indicator {
+  font-size: 0.8rem;
+  color: var(--meta-text);
+  margin-left: 5px;
+}
+
+.post-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 3px solid var(--light-color);
+  text-align: center;
+}
+
+.btn-back {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.875rem 2rem;
+  text-decoration: none;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn-back:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 768px) {
+  .post-section {
+    padding: 2rem 0;
+  }
+  
+  .post-card-single {
+    padding: 2rem 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .post-content .post-title {
+    font-size: 2.2rem;
+  }
+  
+  .post-content .post-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .post-content {
+    font-size: 1rem;
+  }
+  
+  .post-content h2 {
+    font-size: 1.75rem;
+  }
+}
+</style>

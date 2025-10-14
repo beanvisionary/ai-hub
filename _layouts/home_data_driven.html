@@ -1,0 +1,218 @@
+---
+layout: default
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ site.description | default: 'AI technology insights and analysis' }}">
+    <meta name="keywords" content="AI, artificial intelligence, technology, analysis">
+    <meta name="author" content="{{ site.author | default: 'BeanVisionary' }}">
+    
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <meta property="og:title" content="{{ site.title | escape }}">
+    <meta property="og:description" content="{{ site.description | escape }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ site.title | escape }}">
+    <meta name="twitter:description" content="{{ site.description | escape }}">
+    
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/home-styles.css">
+    <title>{{ site.title | escape }} - {{ page.title | default: 'AI Technology Hub' }}</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="{{ '/' | relative_url }}" class="logo">
+                    <img src="/assets/images/logo.png" alt="{{ site.title | escape }} Logo">
+                    {{ site.title | escape }}
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>{{ site.data.site_content.hero.title }}</h1>
+            <p>{{ site.data.site_content.hero.subtitle }}</p>
+            {% if site.data.site_content.hero.cta_button.enabled %}
+                <a href="{{ site.data.site_content.hero.cta_button.link }}" class="btn">
+                    {{ site.data.site_content.hero.cta_button.text }}
+                </a>
+            {% endif %}
+        </div>
+    </section>
+    
+    {% if site.data.site_content.features %}
+    <section class="features-section">
+        <div class="container">
+            <div class="features-grid">
+                {% for feature in site.data.site_content.features %}
+                <div class="feature-card">
+                    <div class="feature-icon">{{ feature.icon }}</div>
+                    <h3 class="feature-title">{{ feature.title }}</h3>
+                    <p class="feature-description">{{ feature.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    
+    <section class="blog-section" id="blog-section">
+        <div class="container">
+            <h2 class="section-title">{{ site.data.site_content.blog_section.title }}</h2>
+            {% if site.data.site_content.blog_section.subtitle %}
+                <p class="section-subtitle">{{ site.data.site_content.blog_section.subtitle }}</p>
+            {% endif %}
+            
+            <div class="blog-posts">
+                {% assign posts_to_show = site.ai_news | where: "featured", true | limit: site.data.site_content.blog_section.max_posts %}
+                {% for post in posts_to_show %}
+                <article class="post-card">
+                    {% if post.image %}
+                    <div class="post-image">
+                        <img src="{{ post.image }}" alt="{{ post.image_alt | default: post.title }}">
+                    </div>
+                    {% endif %}
+                    <div class="post-content">
+                        <h3 class="post-title">{{ post.title }}</h3>
+                        <div class="post-meta">Published on {{ post.date | date: "%B %d, %Y" }}</div>
+                        <p class="post-excerpt">{{ post.excerpt }}</p>
+                        {% if site.data.site_content.blog_section.show_read_more %}
+                        <a href="{{ post.url }}" 
+                            class="internal-link">
+                            Read More →
+                        </a>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            
+            <!-- AI News link temporarily disabled
+            {% if site.ai_news.size > site.data.site_content.blog_section.max_posts %}
+            <div class="view-all-posts">
+                <a href="/ai-news/" class="btn btn-view-all">View All AI News →</a>
+            </div>
+            {% endif %}
+            -->
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>{{ site.data.site_content.footer.tagline }}</p>
+                <p>{{ site.data.site_content.footer.copyright }}</p>
+                {% if site.data.site_content.footer.links %}
+                <div class="footer-links">
+                    {% for link in site.data.site_content.footer.links %}
+                    <a href="{{ link.url }}">{{ link.text }}</a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </footer>
+    
+    <style>
+    .features-section {
+        padding: 4rem 0;
+        background: var(--light-color);
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-title {
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+    }
+    
+    .section-subtitle {
+        text-align: center;
+        color: var(--meta-text);
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+    }
+    
+    .view-all-posts {
+        text-align: center;
+        margin-top: 3rem;
+    }
+    
+    .btn-view-all {
+        background: var(--accent-color);
+        color: white;
+        padding: 0.8rem 2rem;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    
+    .btn-view-all:hover {
+        background: var(--primary-color);
+    }
+    
+    .internal-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    
+    .internal-link:hover {
+        color: var(--secondary-color);
+        text-decoration: underline;
+    }
+    
+    .footer-links {
+        margin: 1rem 0;
+    }
+    
+    .footer-links a {
+        color: var(--light-text);
+        margin: 0 1rem;
+        text-decoration: none;
+    }
+    
+    .footer-links a:hover {
+        color: var(--primary-color);
+    }
+    </style>
+</body>
+</html>
