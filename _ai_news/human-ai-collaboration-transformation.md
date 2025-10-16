@@ -1,6 +1,7 @@
 ---
 title: "Adopting AI is not enough; human-AI collaboration could be key to successful digital transformation"
 date: 2025-10-09
+order: 2
 source: "Deloitte"
 source_url: "https://www.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-outlooks/insurance-industry-outlook.html#heading-5"
 category: "ai-transformation"

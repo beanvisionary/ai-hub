@@ -16,7 +16,7 @@ published: false
   <section class="news-grid">
     <div class="container">
       <div class="posts-grid">
-        {% assign sorted_posts = site.ai_news | sort: 'date' | reverse %}
+        {% assign sorted_posts = site.ai_news | sort: 'order' %}
         {% for post in sorted_posts %}
           <article class="news-card">
             {% if post.image %}

@@ -1,6 +1,7 @@
 ---
 title: "Salesforce launches enterprise vibe-coding product, Agentforce Vibes"
 date: 2025-10-01
+order: 3
 source: "TechCrunch"
 source_url: "https://techcrunch.com/2025/10/01/salesforce-launches-enterprise-vibe-coding-product-agentforce-vibes/"
 category: "ai-development"

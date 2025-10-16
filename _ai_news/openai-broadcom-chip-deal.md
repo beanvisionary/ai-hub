@@ -1,6 +1,7 @@
 ---
 title: "OpenAI taps Broadcom to build its first AI processor in latest chip deal"
 date: 2025-10-13
+order: 1
 source: "NBC News"
 source_url: "https://www.nbcnews.com/business/business-news/openai-taps-broadcom-build-first-ai-processor-latest-chip-deal-rcna237300"
 category: "ai-hardware"
