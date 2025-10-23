@@ -63,6 +63,7 @@ features:
 - `ai-development` - Development tools and platforms
 - `ai-research` - Research breakthroughs
 - `ai-policy` - Policy and regulation news
+- `ai-marketing` - Marketing AI news
 
 ### Tags
 Use descriptive tags like: `["OpenAI", "machine-learning", "enterprise"]`
